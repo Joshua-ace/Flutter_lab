@@ -1,4 +1,4 @@
-# Srekar Fan Association - Flutter Lab Experiments (Exp 2 - 10)
+# Sreekar Fan Association - Flutter Lab Experiments (Exp 2 - 10)
 
 A comprehensive, production-grade Flutter application combining real-world fan association management with a complete academic curriculum implementation for Flutter Lab Experiments 2 through 10.
 
