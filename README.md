@@ -74,3 +74,19 @@ Flutter_lab/
     │   └── experiments_test.dart      # Pulse animation, responsive breakpoints, hub screen tests
     └── widget_test.dart               # App smoke test
 ```
+
+---
+
+## 🚀 Deploying to Vercel
+
+This project is pre-configured for automated deployment on **Vercel** with [`vercel.json`](vercel.json) and [`vercel_build.sh`](vercel_build.sh):
+
+1. Go to [vercel.com](https://vercel.com) and log in with your GitHub account.
+2. Click **Add New...** > **Project**.
+3. Import your repository: **`Joshua-ace/Flutter_lab`**.
+4. In the **Configure Project** screen:
+   - **Framework Preset**: Select `Other` (or leave default).
+   - **Root Directory**: `./` (leave default).
+   - **Build and Output Settings**: Vercel will automatically read `vercel.json`!
+5. Click **Deploy**.
+6. Vercel will automatically download the Flutter SDK, compile the release web bundle, and deploy it with global CDN and single-page app (SPA) routing enabled!

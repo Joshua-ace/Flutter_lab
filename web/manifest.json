@@ -1,11 +1,11 @@
 {
-    "name": "flutter_lab",
-    "short_name": "flutter_lab",
+    "name": "Srekar's Fan Association",
+    "short_name": "Srekar's Association",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#090614",
+    "theme_color": "#7C3AED",
+    "description": "Official Fan Association 3D Interactive Web Application.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
