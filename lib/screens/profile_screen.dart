@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../models/member.dart';
 import '../services/auth_service.dart';
 import '../services/database_service.dart';
 import '../services/storage_service.dart';
+import '../providers/theme_provider.dart';
 import '../theme/app_theme.dart';
 import 'events_screen.dart';
 import 'admin/admin_dashboard.dart';
@@ -80,7 +82,7 @@ class ProfileScreen extends StatelessWidget {
         final registeredEvents = db.events.where((e) => e.isRegistered).toList();
 
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Row(
               children: const [
@@ -226,46 +228,76 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 12),
 
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(color: Colors.grey.shade200),
-                  ),
-                  child: Column(
-                    children: [
-                      SwitchListTile(
-                        secondary: const Icon(Icons.notifications_outlined, color: AppTheme.primaryColor),
-                        title: const Text('Association Notifications'),
-                        subtitle: const Text('Updates, events, and fan alerts'),
-                        value: storage.notificationsEnabled,
-                        onChanged: (_) => storage.toggleNotifications(),
+                Consumer<ThemeProvider>(
+                  builder: (context, themeProvider, _) {
+                    final isDark = themeProvider.isDarkMode;
+                    return Material(
+                      color: Theme.of(context).cardTheme.color ?? Colors.white,
+                      borderRadius: BorderRadius.circular(18),
+                      clipBehavior: Clip.antiAlias,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(
+                            color: isDark ? const Color(0xFF3B3550) : Colors.grey.shade200,
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            SwitchListTile(
+                              secondary: Icon(
+                                isDark ? Icons.dark_mode : Icons.light_mode,
+                                color: AppTheme.primaryColor,
+                              ),
+                              title: const Text('Dark Mode (Exp 5 & 6)'),
+                              subtitle: Text(isDark ? 'Dark theme enabled' : 'Light theme enabled'),
+                              value: isDark,
+                              onChanged: (_) => themeProvider.toggleTheme(),
+                            ),
+                            const Divider(height: 1),
+                            ListTile(
+                              leading: const Icon(Icons.science_outlined, color: AppTheme.primaryColor),
+                              title: const Text('Flutter Lab Hub (Exp 2–10)'),
+                              subtitle: const Text('Interactive syllabus demonstrations'),
+                              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                              onTap: () => Navigator.pushNamed(context, '/experiments'),
+                            ),
+                            const Divider(height: 1),
+                            SwitchListTile(
+                              secondary: const Icon(Icons.notifications_outlined, color: AppTheme.primaryColor),
+                              title: const Text('Association Notifications'),
+                              subtitle: const Text('Updates, events, and fan alerts'),
+                              value: storage.notificationsEnabled,
+                              onChanged: (_) => storage.toggleNotifications(),
+                            ),
+                            const Divider(height: 1),
+                            ListTile(
+                              leading: const Icon(Icons.admin_panel_settings_outlined, color: Colors.orange),
+                              title: const Text('Admin Dashboard'),
+                              subtitle: const Text('Staff & leadership management access'),
+                              trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                              onTap: () {
+                                if (auth.isAdminLoggedIn) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => const AdminDashboard()),
+                                  );
+                                } else {
+                                  _showAdminPrompt(context);
+                                }
+                              },
+                            ),
+                            const Divider(height: 1),
+                            ListTile(
+                              leading: const Icon(Icons.info_outline, color: Colors.grey),
+                              title: const Text('Association Version'),
+                              subtitle: const Text('Srekar Fan Association v2.4 (2026 Edition)'),
+                            ),
+                          ],
+                        ),
                       ),
-                      const Divider(height: 1),
-                      ListTile(
-                        leading: const Icon(Icons.admin_panel_settings_outlined, color: Colors.orange),
-                        title: const Text('Admin Dashboard'),
-                        subtitle: const Text('Staff & leadership management access'),
-                        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                        onTap: () {
-                          if (auth.isAdminLoggedIn) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (_) => const AdminDashboard()),
-                            );
-                          } else {
-                            _showAdminPrompt(context);
-                          }
-                        },
-                      ),
-                      const Divider(height: 1),
-                      ListTile(
-                        leading: const Icon(Icons.info_outline, color: Colors.grey),
-                        title: const Text('Association Version'),
-                        subtitle: const Text('Srekar Fan Association v2.4 (2026 Edition)'),
-                      ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
 
                 const SizedBox(height: 24),

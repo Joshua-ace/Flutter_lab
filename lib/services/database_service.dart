@@ -31,6 +31,7 @@ class LeadershipMember {
   final String role;
   final String phone;
   final String imageUrl;
+  final String description;
 
   LeadershipMember({
     required this.id,
@@ -38,6 +39,7 @@ class LeadershipMember {
     required this.role,
     required this.phone,
     required this.imageUrl,
+    this.description = '',
   });
 }
 
@@ -128,6 +130,94 @@ class DatabaseService extends ChangeNotifier {
 
   // Gallery
   final List<GalleryItem> _gallery = [
+    GalleryItem(
+      id: 'gal_pic_1',
+      title: 'Good Vibes Campus Squad',
+      category: 'Fan meets',
+      imageUrl: 'assets/images/pic1.png',
+      date: 'Oct 2026',
+      likes: 485,
+    ),
+    GalleryItem(
+      id: 'gal_pic_2',
+      title: 'Chibi Fan Squad - Same People Same Chaos',
+      category: 'Photos',
+      imageUrl: 'assets/images/pic2.png',
+      date: 'Oct 2026',
+      likes: 890,
+    ),
+    GalleryItem(
+      id: 'gal_pic_3',
+      title: 'Leadership Anime Edition - Lecture Hall',
+      category: 'Photos',
+      imageUrl: 'assets/images/pic3.png',
+      date: 'Oct 2026',
+      likes: 950,
+    ),
+    GalleryItem(
+      id: 'gal_pic_4',
+      title: 'Biker Rides & Campus Hangout',
+      category: 'Fan meets',
+      imageUrl: 'assets/images/pic4.png',
+      date: 'Sep 2026',
+      likes: 412,
+    ),
+    GalleryItem(
+      id: 'gal_pic_5',
+      title: 'Grand Birthday Celebration & Cake Cutting',
+      category: 'Events',
+      imageUrl: 'assets/images/pic5.png',
+      date: 'Aug 2026',
+      likes: 674,
+    ),
+    GalleryItem(
+      id: 'gal_pic_6',
+      title: 'Sunny Day Gathering & Friendship Vibes',
+      category: 'Photos',
+      imageUrl: 'assets/images/pic6.png',
+      date: 'Jul 2026',
+      likes: 538,
+    ),
+    GalleryItem(
+      id: 'gal_pic_7',
+      title: 'Campus Chronicle: Friends Today, Leaders Tomorrow',
+      category: 'Events',
+      imageUrl: 'assets/images/pic7.png',
+      date: 'Oct 2026',
+      likes: 1024,
+    ),
+    GalleryItem(
+      id: 'gal_pic_8',
+      title: 'President Chill Vibes & Moments',
+      category: 'Photos',
+      imageUrl: 'assets/images/pic8.png',
+      date: 'Sep 2026',
+      likes: 395,
+    ),
+    GalleryItem(
+      id: 'gal_pic_9',
+      title: 'Mall Outing & Cool Shades Duo',
+      category: 'Fan meets',
+      imageUrl: 'assets/images/pic9.png',
+      date: 'Sep 2026',
+      likes: 462,
+    ),
+    GalleryItem(
+      id: 'gal_pic_10',
+      title: 'Rooftop Summit & Sunny Waves',
+      category: 'Fan meets',
+      imageUrl: 'assets/images/pic10.png',
+      date: 'Aug 2026',
+      likes: 715,
+    ),
+    GalleryItem(
+      id: 'gal_pic_11',
+      title: 'Hostel Chill Nights & Endless Stories',
+      category: 'Photos',
+      imageUrl: 'assets/images/pic11.png',
+      date: 'Jul 2026',
+      likes: 580,
+    ),
     GalleryItem(
       id: 'gal_1',
       title: 'Mega Fan Meet Arena Celebrations',
@@ -238,37 +328,42 @@ class DatabaseService extends ChangeNotifier {
     LeadershipMember(
       id: 'ldr_1',
       name: 'Joshua',
-      role: 'President',
+      role: 'President of Club',
       phone: '+91 99887 76655',
-      imageUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
+      imageUrl: 'assets/images/joshua.png',
+      description: 'Founder and visionary president of the association. Spearheads state-wide philanthropic missions, community food drives, and youth empowerment initiatives.',
     ),
     LeadershipMember(
       id: 'ldr_2',
-      name: 'Arun Kumar',
+      name: 'Sri Ram',
       role: 'General Secretary',
       phone: '+91 98765 12345',
-      imageUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
+      imageUrl: 'assets/images/sriram.png',
+      description: 'Chief administrator handling official club correspondence, legal representation, district chapter affiliations, and annual fan meet coordination.',
     ),
     LeadershipMember(
       id: 'ldr_3',
-      name: 'Suresh Varma',
-      role: 'Treasurer',
-      phone: '+91 97654 32109',
-      imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80',
+      name: 'Akhiila',
+      role: 'Manager',
+      phone: '+91 96543 21098',
+      imageUrl: 'assets/images/akhiila.png',
+      description: 'Oversees daily club operations, event logistics, official merchandise, welfare activities, and digital membership campaigns.',
     ),
     LeadershipMember(
       id: 'ldr_4',
-      name: 'Kiran Deep',
-      role: 'Manager',
-      phone: '+91 96543 21098',
-      imageUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80',
+      name: 'Harshith',
+      role: 'Treasurer',
+      phone: '+91 97654 32109',
+      imageUrl: 'assets/images/harshith.png',
+      description: 'Custodian of association finances, ensuring 100% transparent budgeting, donation audits, and funding for social welfare projects.',
     ),
     LeadershipMember(
       id: 'ldr_5',
-      name: 'Manoj Prasad',
+      name: 'Akhila',
       role: 'Coordinator',
       phone: '+91 95432 10987',
-      imageUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=400&q=80',
+      imageUrl: 'assets/images/akhila.png',
+      description: 'Active field coordinator leading ground volunteer teams, stage rally setups, digital media campaigns, and fan rally communications.',
     ),
   ];
 

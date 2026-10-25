@@ -133,7 +133,7 @@ class _EventsScreenState extends State<EventsScreen> {
         }).toList();
 
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Row(
               children: const [

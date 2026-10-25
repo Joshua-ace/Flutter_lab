@@ -14,26 +14,41 @@ class MembershipScreen extends StatefulWidget {
 class _MembershipScreenState extends State<MembershipScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _cityController = TextEditingController();
   String _selectedBloodGroup = 'O+';
   String _selectedTier = 'Gold Fan';
+  bool _acceptedTerms = false;
+  bool _termsError = false;
+  final Set<String> _selectedInterests = {'Charity & Blood Drives'};
   bool _isSuccess = false;
   Member? _registeredMember;
 
   final List<String> _bloodGroups = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
   final List<String> _tiers = ['Gold Fan', 'Platinum VIP', 'Youth Wing Leader'];
+  final List<String> _availableInterests = [
+    'Charity & Blood Drives',
+    'Event Logistics',
+    'Social Media Wing',
+    'Cultural Meets',
+  ];
 
   @override
   void dispose() {
     _nameController.dispose();
+    _emailController.dispose();
     _phoneController.dispose();
     _cityController.dispose();
     super.dispose();
   }
 
   void _submitForm() {
-    if (_formKey.currentState!.validate()) {
+    setState(() {
+      _termsError = !_acceptedTerms;
+    });
+
+    if (_formKey.currentState!.validate() && _acceptedTerms) {
       final newMember = Member(
         id: 'mem_${DateTime.now().millisecondsSinceEpoch}',
         name: _nameController.text.trim(),
@@ -60,13 +75,21 @@ class _MembershipScreenState extends State<MembershipScreen> {
           behavior: SnackBarBehavior.floating,
         ),
       );
+    } else if (!_acceptedTerms) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please accept the Association membership terms to proceed.'),
+          backgroundColor: Colors.redAccent,
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.bgLight,
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Row(
           children: const [
@@ -125,7 +148,7 @@ class _MembershipScreenState extends State<MembershipScreen> {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        'Receive your official digital ID card, event access, and join our active charity network.',
+                        'Experiment 7: Form design, input fields, regex validation, and error feedback.',
                         style: TextStyle(fontSize: 12, color: Colors.black87),
                       ),
                     ],
@@ -146,7 +169,7 @@ class _MembershipScreenState extends State<MembershipScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Personal Details',
+                    'Personal & Contact Details',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -155,37 +178,88 @@ class _MembershipScreenState extends State<MembershipScreen> {
                   ),
                   const SizedBox(height: 16),
 
+                  // Name Field
                   TextFormField(
                     controller: _nameController,
                     decoration: const InputDecoration(
                       labelText: 'Full Name *',
                       prefixIcon: Icon(Icons.person_outline),
+                      hintText: 'e.g. John Doe',
                     ),
-                    validator: (v) => v == null || v.trim().isEmpty ? 'Please enter your full name' : null,
+                    validator: (v) {
+                      if (v == null || v.trim().isEmpty) {
+                        return 'Please enter your full name';
+                      }
+                      if (v.trim().length < 3) {
+                        return 'Name must be at least 3 characters long';
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 14),
 
+                  // Email Field
+                  TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Email Address *',
+                      prefixIcon: Icon(Icons.email_outlined),
+                      hintText: 'e.g. member@association.org',
+                    ),
+                    validator: (v) {
+                      if (v == null || v.trim().isEmpty) {
+                        return 'Please enter your email address';
+                      }
+                      final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                      if (!emailRegex.hasMatch(v.trim())) {
+                        return 'Please enter a valid email address (e.g. name@domain.com)';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 14),
+
+                  // Phone Field
                   TextFormField(
                     controller: _phoneController,
                     keyboardType: TextInputType.phone,
                     decoration: const InputDecoration(
-                      labelText: 'Phone Number *',
+                      labelText: 'Phone Number (10 Digits) *',
                       prefixIcon: Icon(Icons.phone_outlined),
+                      hintText: '9876543210',
                     ),
-                    validator: (v) => v == null || v.trim().isEmpty ? 'Please enter your contact number' : null,
+                    validator: (v) {
+                      if (v == null || v.trim().isEmpty) {
+                        return 'Please enter your contact number';
+                      }
+                      final phoneRegex = RegExp(r'^[0-9]{10}$');
+                      if (!phoneRegex.hasMatch(v.trim())) {
+                        return 'Please enter a valid 10-digit mobile number';
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 14),
 
+                  // City Field
                   TextFormField(
                     controller: _cityController,
                     decoration: const InputDecoration(
                       labelText: 'City / District *',
                       prefixIcon: Icon(Icons.location_city_outlined),
+                      hintText: 'e.g. Hyderabad',
                     ),
-                    validator: (v) => v == null || v.trim().isEmpty ? 'Please enter your city/district' : null,
+                    validator: (v) {
+                      if (v == null || v.trim().isEmpty) {
+                        return 'Please enter your city or district';
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(height: 14),
 
+                  // Blood Group & Tier Row
                   Row(
                     children: [
                       Expanded(
@@ -221,7 +295,63 @@ class _MembershipScreenState extends State<MembershipScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 18),
+
+                  // Volunteer Wing Interests
+                  const Text(
+                    'Association Wings & Interests',
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 4,
+                    children: _availableInterests.map((interest) {
+                      final isSelected = _selectedInterests.contains(interest);
+                      return FilterChip(
+                        selected: isSelected,
+                        label: Text(interest),
+                        selectedColor: AppTheme.primaryColor.withValues(alpha: 0.2),
+                        checkmarkColor: AppTheme.primaryColor,
+                        onSelected: (selected) {
+                          setState(() {
+                            if (selected) {
+                              _selectedInterests.add(interest);
+                            } else {
+                              _selectedInterests.remove(interest);
+                            }
+                          });
+                        },
+                      );
+                    }).toList(),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // Terms and Condition Checkbox
+                  CheckboxListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: const Text(
+                      'I pledge to uphold the values and charity missions of Srekar\'s Association.',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                    value: _acceptedTerms,
+                    activeColor: AppTheme.primaryColor,
+                    onChanged: (val) {
+                      setState(() {
+                        _acceptedTerms = val ?? false;
+                        if (_acceptedTerms) _termsError = false;
+                      });
+                    },
+                    subtitle: _termsError
+                        ? const Text(
+                            'You must accept the terms to register',
+                            style: TextStyle(color: Colors.red, fontSize: 11),
+                          )
+                        : null,
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+
+                  const SizedBox(height: 20),
 
                   SizedBox(
                     width: double.infinity,

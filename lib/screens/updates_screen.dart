@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../models/update.dart';
 import '../services/database_service.dart';
 import '../theme/app_theme.dart';
+import '../widgets/tilt_3d_card.dart';
 
 class UpdatesScreen extends StatefulWidget {
   const UpdatesScreen({super.key});
@@ -36,7 +37,7 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
         }).toList();
 
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Row(
               children: const [
@@ -146,13 +147,18 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
       iconColor = Colors.green;
     }
 
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(18),
-        onTap: () => _openDetailDialog(context, item),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Tilt3DCard(
+        borderRadius: 18,
+        elevation: 10,
+        child: Card(
+          margin: EdgeInsets.zero,
+          elevation: 0,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(18),
+            onTap: () => _openDetailDialog(context, item),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -245,6 +251,13 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
                     height: 160,
                     width: double.infinity,
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      height: 160,
+                      color: AppTheme.primaryLight.withValues(alpha: 0.15),
+                      child: const Center(
+                        child: Icon(Icons.image, size: 40, color: AppTheme.primaryColor),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -268,6 +281,8 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
           ),
         ),
       ),
+      ),
+      ),
     );
   }
 
@@ -285,7 +300,17 @@ class _UpdatesScreenState extends State<UpdatesScreen> {
               if (item.imageUrl != null) ...[
                 ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: Image.network(item.imageUrl!, fit: BoxFit.cover),
+                  child: Image.network(
+                    item.imageUrl!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      height: 140,
+                      color: AppTheme.primaryLight.withValues(alpha: 0.15),
+                      child: const Center(
+                        child: Icon(Icons.image, size: 40, color: AppTheme.primaryColor),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(height: 14),
               ],

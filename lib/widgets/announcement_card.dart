@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/update.dart';
 import '../theme/app_theme.dart';
+import 'tilt_3d_card.dart';
 
 class AnnouncementCard extends StatelessWidget {
   final UpdateItem update;
@@ -14,8 +15,11 @@ class AnnouncementCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return Tilt3DCard(
+      borderRadius: 18,
+      elevation: 12,
+      child: Container(
+        decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
             Colors.white,
@@ -181,6 +185,7 @@ class AnnouncementCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

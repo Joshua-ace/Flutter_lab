@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/event.dart';
 import '../theme/app_theme.dart';
+import 'tilt_3d_card.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
@@ -16,8 +17,11 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return Tilt3DCard(
+      borderRadius: 18,
+      elevation: 12,
+      child: Container(
+        decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
         border: Border.all(
@@ -172,6 +176,7 @@ class EventCard extends StatelessWidget {
             ),
           ),
         ),
+      ),
       ),
     );
   }

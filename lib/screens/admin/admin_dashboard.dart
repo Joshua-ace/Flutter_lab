@@ -49,7 +49,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
       listenable: db,
       builder: (context, _) {
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             backgroundColor: const Color(0xFF1E1B2E),
             foregroundColor: Colors.white,
@@ -363,7 +363,9 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     child: ListTile(
                       leading: ClipRRect(
                         borderRadius: BorderRadius.circular(6),
-                        child: Image.network(item.imageUrl, width: 45, height: 45, fit: BoxFit.cover),
+                        child: item.imageUrl.startsWith('assets/')
+                            ? Image.asset(item.imageUrl, width: 45, height: 45, fit: BoxFit.cover)
+                            : Image.network(item.imageUrl, width: 45, height: 45, fit: BoxFit.cover),
                       ),
                       title: Text(item.title, style: const TextStyle(fontWeight: FontWeight.bold)),
                       subtitle: Text('${item.category} • ${item.likes} likes'),
@@ -665,7 +667,11 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 return Card(
                   margin: const EdgeInsets.only(bottom: 8),
                   child: ListTile(
-                    leading: CircleAvatar(backgroundImage: NetworkImage(ldr.imageUrl)),
+                    leading: CircleAvatar(
+                      backgroundImage: ldr.imageUrl.startsWith('assets/')
+                          ? AssetImage(ldr.imageUrl) as ImageProvider
+                          : NetworkImage(ldr.imageUrl),
+                    ),
                     title: Text(ldr.name, style: const TextStyle(fontWeight: FontWeight.bold)),
                     subtitle: Text('${ldr.role} • ${ldr.phone}'),
                   ),

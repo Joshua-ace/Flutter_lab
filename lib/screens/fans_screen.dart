@@ -118,7 +118,7 @@ class _FansScreenState extends State<FansScreen> with SingleTickerProviderStateM
       listenable: db,
       builder: (context, _) {
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Row(
               children: const [

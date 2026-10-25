@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/gallery_item.dart';
 import '../theme/app_theme.dart';
+import 'tilt_3d_card.dart';
 
 class GalleryCard extends StatelessWidget {
   final GalleryItem item;
@@ -16,17 +17,13 @@ class GalleryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+    return Tilt3DCard(
+      borderRadius: 18,
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+        ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(18),
         child: Stack(
@@ -34,16 +31,27 @@ class GalleryCard extends StatelessWidget {
           children: [
             InkWell(
               onTap: onTap,
-              child: Image.network(
-                item.imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Container(
-                  color: AppTheme.primaryLight.withValues(alpha: 0.2),
-                  child: const Center(
-                    child: Icon(Icons.image_outlined, size: 40, color: AppTheme.primaryColor),
-                  ),
-                ),
-              ),
+              child: item.imageUrl.startsWith('assets/')
+                  ? Image.asset(
+                      item.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: AppTheme.primaryLight.withValues(alpha: 0.2),
+                        child: const Center(
+                          child: Icon(Icons.image_outlined, size: 40, color: AppTheme.primaryColor),
+                        ),
+                      ),
+                    )
+                  : Image.network(
+                      item.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: AppTheme.primaryLight.withValues(alpha: 0.2),
+                        child: const Center(
+                          child: Icon(Icons.image_outlined, size: 40, color: AppTheme.primaryColor),
+                        ),
+                      ),
+                    ),
             ),
             // Gradient overlay
             Positioned(
@@ -116,6 +124,7 @@ class GalleryCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       ),
     );
   }

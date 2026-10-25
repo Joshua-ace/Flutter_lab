@@ -3,6 +3,7 @@ import '../models/gallery_item.dart';
 import '../services/database_service.dart';
 import '../theme/app_theme.dart';
 import '../widgets/gallery_card.dart';
+import '../widgets/coverflow_3d_gallery.dart';
 
 class GalleryScreen extends StatefulWidget {
   const GalleryScreen({super.key});
@@ -13,6 +14,7 @@ class GalleryScreen extends StatefulWidget {
 
 class _GalleryScreenState extends State<GalleryScreen> {
   String _selectedCategory = 'All';
+  bool _is3DCoverflow = true;
 
   final List<String> _categories = [
     'All',
@@ -48,14 +50,25 @@ class _GalleryScreenState extends State<GalleryScreen> {
               boundaryMargin: const EdgeInsets.all(20),
               minScale: 0.8,
               maxScale: 4.0,
-              child: Image.network(
-                item.imageUrl,
-                fit: BoxFit.contain,
-                loadingBuilder: (context, child, progress) {
-                  if (progress == null) return child;
-                  return const Center(child: CircularProgressIndicator(color: Colors.white));
-                },
-              ),
+              child: item.imageUrl.startsWith('assets/')
+                  ? Image.asset(
+                      item.imageUrl,
+                      fit: BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) => const Center(
+                        child: Icon(Icons.broken_image, color: Colors.white, size: 50),
+                      ),
+                    )
+                  : Image.network(
+                      item.imageUrl,
+                      fit: BoxFit.contain,
+                      loadingBuilder: (context, child, progress) {
+                        if (progress == null) return child;
+                        return const Center(child: CircularProgressIndicator(color: Colors.white));
+                      },
+                      errorBuilder: (context, error, stackTrace) => const Center(
+                        child: Icon(Icons.broken_image, color: Colors.white, size: 50),
+                      ),
+                    ),
             ),
           ),
           bottomNavigationBar: Container(
@@ -111,7 +124,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
         }).toList();
 
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Row(
               children: const [
@@ -119,13 +132,75 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 Text('Association Gallery'),
               ],
             ),
+            actions: [
+              IconButton(
+                tooltip: _is3DCoverflow ? 'Switch to 3D Grid' : 'Switch to 3D Coverflow',
+                icon: Icon(_is3DCoverflow ? Icons.grid_view_rounded : Icons.view_carousel_rounded),
+                onPressed: () {
+                  setState(() {
+                    _is3DCoverflow = !_is3DCoverflow;
+                  });
+                },
+              ),
+            ],
           ),
           body: Column(
             children: [
-              // Category filter tabs
+              // Category filter tabs & 3D indicator
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      _is3DCoverflow ? '✨ 3D Coverflow Experience' : '✨ 3D Tilt Grid (${filteredItems.length})',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.primaryColor,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _is3DCoverflow = !_is3DCoverflow;
+                        });
+                      },
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryColor.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              _is3DCoverflow ? Icons.grid_view : Icons.view_carousel,
+                              size: 14,
+                              color: AppTheme.primaryColor,
+                            ),
+                            const SizedBox(width: 4),
+                            Text(
+                              _is3DCoverflow ? 'View Grid' : 'View 3D',
+                              style: const TextStyle(
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                                color: AppTheme.primaryColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: Row(
                   children: _categories.map((cat) {
                     final isSelected = _selectedCategory == cat;
@@ -159,7 +234,7 @@ class _GalleryScreenState extends State<GalleryScreen> {
                 ),
               ),
 
-              // Photos Grid
+              // Photos Display: 3D Coverflow or 3D Grid
               Expanded(
                 child: filteredItems.isEmpty
                     ? Center(
@@ -172,24 +247,35 @@ class _GalleryScreenState extends State<GalleryScreen> {
                           ],
                         ),
                       )
-                    : GridView.builder(
-                        padding: const EdgeInsets.all(16),
-                        itemCount: filteredItems.length,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 0.85,
-                        ),
-                        itemBuilder: (context, index) {
-                          final item = filteredItems[index];
-                          return GalleryCard(
-                            item: item,
-                            onTap: () => _openFullScreenViewer(context, item),
-                            onLikeToggle: () => db.toggleGalleryLike(item.id),
-                          );
-                        },
-                      ),
+                    : _is3DCoverflow
+                        ? SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Coverflow3DGallery(
+                                items: filteredItems,
+                                onItemTap: (item) => _openFullScreenViewer(context, item),
+                                onLikeToggle: (item) => db.toggleGalleryLike(item.id),
+                              ),
+                            ),
+                          )
+                        : GridView.builder(
+                            padding: const EdgeInsets.all(16),
+                            itemCount: filteredItems.length,
+                            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 12,
+                              mainAxisSpacing: 12,
+                              childAspectRatio: 0.85,
+                            ),
+                            itemBuilder: (context, index) {
+                              final item = filteredItems[index];
+                              return GalleryCard(
+                                item: item,
+                                onTap: () => _openFullScreenViewer(context, item),
+                                onLikeToggle: () => db.toggleGalleryLike(item.id),
+                              );
+                            },
+                          ),
               ),
             ],
           ),

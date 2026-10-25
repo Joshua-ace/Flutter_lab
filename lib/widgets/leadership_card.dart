@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/database_service.dart';
 import '../theme/app_theme.dart';
+import 'tilt_3d_card.dart';
 
 class LeadershipCard extends StatelessWidget {
   final LeadershipMember member;
@@ -12,26 +13,46 @@ class LeadershipCard extends StatelessWidget {
     this.isFeatured = false,
   });
 
+  ImageProvider _getImageProvider(String url) {
+    if (url.startsWith('assets/')) {
+      return AssetImage(url);
+    }
+    return NetworkImage(url);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final cardColor = Theme.of(context).cardTheme.color ?? Colors.white;
+
     if (isFeatured) {
-      return Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(20),
+      return Tilt3DCard(
+        borderRadius: 22,
+        elevation: 16,
+        child: Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
+          color: cardColor,
           gradient: LinearGradient(
             colors: [
-              AppTheme.primaryColor.withValues(alpha: 0.08),
-              AppTheme.primaryColor.withValues(alpha: 0.02),
+              AppTheme.primaryColor.withValues(alpha: 0.12),
+              AppTheme.primaryColor.withValues(alpha: 0.03),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
           borderRadius: BorderRadius.circular(22),
           border: Border.all(
-            color: AppTheme.primaryColor.withValues(alpha: 0.25),
+            color: AppTheme.primaryColor.withValues(alpha: 0.35),
             width: 1.5,
           ),
+          boxShadow: [
+            BoxShadow(
+              color: AppTheme.primaryColor.withValues(alpha: 0.08),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
         ),
         child: Column(
           children: [
@@ -41,20 +62,20 @@ class LeadershipCard extends StatelessWidget {
                 border: Border.all(color: AppTheme.primaryColor, width: 3),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.primaryColor.withValues(alpha: 0.2),
+                    color: AppTheme.primaryColor.withValues(alpha: 0.25),
                     blurRadius: 16,
                   ),
                 ],
               ),
               child: CircleAvatar(
-                radius: 48,
+                radius: 54, // President size
                 backgroundColor: AppTheme.primaryLight.withValues(alpha: 0.3),
-                backgroundImage: NetworkImage(member.imageUrl),
+                backgroundImage: _getImageProvider(member.imageUrl),
               ),
             ),
             const SizedBox(height: 14),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
               decoration: BoxDecoration(
                 color: AppTheme.primaryColor,
                 borderRadius: BorderRadius.circular(20),
@@ -75,10 +96,24 @@ class LeadershipCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xFF1E1B2E),
               ),
             ),
-            const SizedBox(height: 4),
+            const SizedBox(height: 6),
+            if (member.description.isNotEmpty) ...[
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  member.description,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey.shade700,
+                    height: 1.35,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+            ],
             Text(
               member.phone,
               style: TextStyle(
@@ -88,65 +123,75 @@ class LeadershipCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
       );
     }
 
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 10,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          CircleAvatar(
-            radius: 36,
-            backgroundColor: AppTheme.primaryLight.withValues(alpha: 0.2),
-            backgroundImage: NetworkImage(member.imageUrl),
-          ),
-          const SizedBox(height: 10),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-            decoration: BoxDecoration(
-              color: AppTheme.primaryColor.withValues(alpha: 0.1),
-              borderRadius: BorderRadius.circular(12),
+    return Tilt3DCard(
+      borderRadius: 16,
+      elevation: 10,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: cardColor,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
+        ),
+        child: Column(
+          children: [
+            CircleAvatar(
+              radius: 41, // Equal size for other leaders (82px diameter)
+              backgroundColor: AppTheme.primaryLight.withValues(alpha: 0.2),
+              backgroundImage: _getImageProvider(member.imageUrl),
             ),
-            child: Text(
-              member.role,
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: AppTheme.primaryColor.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Text(
+                member.role,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: AppTheme.primaryColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 11,
+                ),
+              ),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              member.name,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: AppTheme.primaryColor,
                 fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
+            if (member.description.isNotEmpty) ...[
+              const SizedBox(height: 6),
+              Text(
+                member.description,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey.shade600,
+                  height: 1.3,
+                ),
+              ),
+            ],
+            const SizedBox(height: 6),
+            Text(
+              member.phone,
+              style: TextStyle(
+                color: Colors.grey.shade500,
                 fontSize: 11,
               ),
             ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            member.name,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          const SizedBox(height: 2),
-          Text(
-            member.phone,
-            style: TextStyle(
-              color: Colors.grey.shade600,
-              fontSize: 11,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

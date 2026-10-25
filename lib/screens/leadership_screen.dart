@@ -21,7 +21,7 @@ class LeadershipScreen extends StatelessWidget {
         final otherLeaders = leaderList.where((m) => m.id != president.id).toList();
 
         return Scaffold(
-          backgroundColor: AppTheme.bgLight,
+          backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Row(
               children: const [
@@ -39,9 +39,9 @@ class LeadershipScreen extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Theme.of(context).cardTheme.color ?? Colors.white,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.grey.shade200),
+                    border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
                   ),
                   child: Row(
                     children: [
@@ -78,7 +78,6 @@ class LeadershipScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF1E1B2E),
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -96,7 +95,6 @@ class LeadershipScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF1E1B2E),
                   ),
                 ),
                 const SizedBox(height: 12),
@@ -110,7 +108,7 @@ class LeadershipScreen extends StatelessWidget {
                     crossAxisCount: 2,
                     crossAxisSpacing: 12,
                     mainAxisSpacing: 12,
-                    childAspectRatio: 0.88,
+                    childAspectRatio: 0.72,
                   ),
                   itemBuilder: (context, index) {
                     final leader = otherLeaders[index];
