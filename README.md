@@ -83,5 +83,41 @@ EXPERIMENT 2 :
 
 <img width="1777" height="232" alt="image" src="https://github.com/user-attachments/assets/f8d74ce7-d271-4266-9d29-29fc6a0f7de8" />
 
+EXPERIMENT 3 : 
+
+<img width="1777" height="227" alt="image" src="https://github.com/user-attachments/assets/cefd8203-58ad-4849-afda-22a34e2d7014" />
+
+EXPERIMENT 4 : 
+
+<img width="1772" height="227" alt="image" src="https://github.com/user-attachments/assets/001ce8f9-d71d-4e64-823f-993115cc15a8" />
+
+EXPERIMENT 5 : 
+
+<img width="1767" height="227" alt="image" src="https://github.com/user-attachments/assets/a3c6fb36-5cfe-48f6-91ef-0e76386fd065" />
+
+EXPERIMENT 6 : 
+
+<img width="1775" height="237" alt="image" src="https://github.com/user-attachments/assets/1c98c939-480e-4013-b630-a8056b72e34b" />
+
+EXPERIEMENT 7 : 
+
+<img width="1775" height="225" alt="image" src="https://github.com/user-attachments/assets/f2292b49-81f7-4d2e-b886-11f51ad4b82a" />
+
+EXPERIMENT 8 : 
+
+<img width="1767" height="235" alt="image" src="https://github.com/user-attachments/assets/461ddd5d-0f70-4c9c-9a26-c277576e76ba" />
+
+EXPERIMENT 9 : 
+
+<img width="1770" height="220" alt="image" src="https://github.com/user-attachments/assets/82fe9d46-38ed-43dc-8bbd-264bc17c0803" />
+
+EXPERIMENT 10 : 
+
+<img width="1777" height="232" alt="image" src="https://github.com/user-attachments/assets/4222d39d-a617-40c5-a83c-f21886d4deb1" />
+
+
+
+
+
 
 
