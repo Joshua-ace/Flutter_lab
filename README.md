@@ -80,22 +80,27 @@ Flutter_lab/
 ## 🚀 Deployed in vercel as welllllllllll...
 
 EXPERIMENT 2 : 
-<img width="1777" height="232" alt="image" src="https://github.com/user-attachments/assets/f8d74ce7-d271-4266-9d29-29fc6a0f7de8" />
+
 <img width="1852" height="912" alt="image" src="https://github.com/user-attachments/assets/c1c7e080-5aa7-48a7-89d2-0be0bd139cf9" />
 <img width="1857" height="910" alt="image" src="https://github.com/user-attachments/assets/c892224f-97eb-4cf2-aadc-d7cfed6a71c0" />
 
 EXPERIMENT 3 :
+
 For different Screens ->
+
 <img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/d0053b80-0ac0-4247-ad32-9f4459b39695" />
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/8b18fd64-fbfb-4e09-877b-96c3ba122b09" />
 <img width="1448" height="1086" alt="image" src="https://github.com/user-attachments/assets/972baea4-3916-4395-bddf-49b7ce578c53" />
 
 
 EXPERIMENT 4 :
+
 In home page  
 <img width="1600" height="897" alt="image" src="https://github.com/user-attachments/assets/833f583c-d120-4815-ab8a-16ffe2aa63c7" />
+
 navigated to profile page  
 <img width="1600" height="782" alt="image" src="https://github.com/user-attachments/assets/289f9829-3ab8-4b60-b0bd-08ee1b88f6bc" />
+
 stack process 
 <img width="985" height="487" alt="image" src="https://github.com/user-attachments/assets/f174853b-0e0d-409f-981d-506dd283b0f7" />
 
