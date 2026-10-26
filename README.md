@@ -78,3 +78,10 @@ Flutter_lab/
 ---
 
 ## 🚀 Deployed in vercel as welllllllllll...
+
+EXPERIMENT 2 : 
+
+<img width="1777" height="232" alt="image" src="https://github.com/user-attachments/assets/f8d74ce7-d271-4266-9d29-29fc6a0f7de8" />
+
+
+
