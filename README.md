@@ -142,9 +142,11 @@ Animation framework :
 
 EXPERIMENT 9 : 
 
-EXPERIMENT 10 : 
+<img width="1851" height="897" alt="image" src="https://github.com/user-attachments/assets/eb5006cf-ffa9-4742-bf2f-7ccafc68595d" />
 
-<img width="1777" height="232" alt="image" src="https://github.com/user-attachments/assets/4222d39d-a617-40c5-a83c-f21886d4deb1" />
+
+EXPERIMENT 10 : 
+<img width="1671" height="941" alt="image" src="https://github.com/user-attachments/assets/19b0f301-634b-4e21-a350-2def7fab41ca" />
 
 
 
