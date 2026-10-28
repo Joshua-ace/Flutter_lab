@@ -135,6 +135,11 @@ Successful Submission
 
 EXPERIMENT 8 : 
 
+Animation framework :
+<img width="556" height="437" alt="image" src="https://github.com/user-attachments/assets/8f64147d-9ee5-4f3f-adaf-97d84076651a" />
+<img width="1862" height="918" alt="image" src="https://github.com/user-attachments/assets/795847d8-5eb2-4ca0-ac84-7b37349628e7" />
+<img width="1396" height="803" alt="image" src="https://github.com/user-attachments/assets/13a10090-efcd-4c07-9828-af169dfdb546" />
+
 <img width="1767" height="235" alt="image" src="https://github.com/user-attachments/assets/461ddd5d-0f70-4c9c-9a26-c277576e76ba" />
 
 EXPERIMENT 9 : 
