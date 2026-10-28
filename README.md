@@ -87,19 +87,21 @@ EXPERIMENT 2 :
 EXPERIMENT 3 :
 
 For different Screens ->
-
+Phone view 
 <img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/d0053b80-0ac0-4247-ad32-9f4459b39695" />
+Laptop view 
 <img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/8b18fd64-fbfb-4e09-877b-96c3ba122b09" />
+Tab view 
 <img width="1448" height="1086" alt="image" src="https://github.com/user-attachments/assets/972baea4-3916-4395-bddf-49b7ce578c53" />
 
 
 EXPERIMENT 4 :
-
-In home page  
-<img width="1600" height="897" alt="image" src="https://github.com/user-attachments/assets/833f583c-d120-4815-ab8a-16ffe2aa63c7" />
-
-navigated to profile page  
-<img width="1600" height="782" alt="image" src="https://github.com/user-attachments/assets/289f9829-3ab8-4b60-b0bd-08ee1b88f6bc" />
+click register
+<img width="1862" height="907" alt="image" src="https://github.com/user-attachments/assets/71e68738-48bf-4c39-83fb-e65bb1bfeb25" />
+navigated to registration of the event 
+<img width="1857" height="911" alt="image" src="https://github.com/user-attachments/assets/c768cc67-efbc-47bb-8166-ac16ad8e3287" />
+Registration done 
+<img width="1862" height="917" alt="image" src="https://github.com/user-attachments/assets/0c5bf8d8-1d5f-43c7-8c3e-de69b066f55e" />
 
 stack process 
 <img width="985" height="487" alt="image" src="https://github.com/user-attachments/assets/f174853b-0e0d-409f-981d-506dd283b0f7" />
