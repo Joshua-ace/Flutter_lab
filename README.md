@@ -96,27 +96,42 @@ Tab view
 
 
 EXPERIMENT 4 :
+
 click register
+
 <img width="1862" height="907" alt="image" src="https://github.com/user-attachments/assets/71e68738-48bf-4c39-83fb-e65bb1bfeb25" />
+
 navigated to registration of the event 
+
 <img width="1857" height="911" alt="image" src="https://github.com/user-attachments/assets/c768cc67-efbc-47bb-8166-ac16ad8e3287" />
+
 Registration done 
+
 <img width="1862" height="917" alt="image" src="https://github.com/user-attachments/assets/0c5bf8d8-1d5f-43c7-8c3e-de69b066f55e" />
 
-stack process 
-<img width="985" height="487" alt="image" src="https://github.com/user-attachments/assets/f174853b-0e0d-409f-981d-506dd283b0f7" />
+EXPERIMENT 5 & 6 : 
 
-EXPERIMENT 5 : 
+Stateless widget with custom reusable widgets : 
 
-<img width="1767" height="227" alt="image" src="https://github.com/user-attachments/assets/a3c6fb36-5cfe-48f6-91ef-0e76386fd065" />
+<img width="1851" height="792" alt="image" src="https://github.com/user-attachments/assets/b0857c5c-8457-40b1-9dfa-13c1f3464dd8" />
 
-EXPERIMENT 6 : 
+Statefull widget : Theme toggled 
 
-<img width="1775" height="237" alt="image" src="https://github.com/user-attachments/assets/1c98c939-480e-4013-b630-a8056b72e34b" />
+<img width="1348" height="817" alt="image" src="https://github.com/user-attachments/assets/b9012d83-a695-4aed-9294-8c1a8cb8a3de" />
 
 EXPERIEMENT 7 : 
 
-<img width="1775" height="225" alt="image" src="https://github.com/user-attachments/assets/f2292b49-81f7-4d2e-b886-11f51ad4b82a" />
+Form design with various input fields 
+
+<img width="1835" height="912" alt="image" src="https://github.com/user-attachments/assets/4de9af2d-f2f9-4b51-9096-81ab3bb4040b" />
+
+Form Validation
+
+<img width="1845" height="845" alt="image" src="https://github.com/user-attachments/assets/212f8127-6792-4bc9-8e9d-d157a3f633b1" />
+
+Successful Submission 
+
+<img width="1857" height="888" alt="image" src="https://github.com/user-attachments/assets/21a44d9a-eda7-440a-a471-e4700f5874ed" />
 
 EXPERIMENT 8 : 
 
